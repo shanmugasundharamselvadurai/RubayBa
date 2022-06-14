@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.LoginWithEmailPage"
+                       x:TypeArguments="viewModels:LoginPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Margin="30,0,30,0">
+                <StackLayout Margin="0,10,0,0">
+                    <Image HorizontalOptions="Center"
+                           Source="logo.png"
+                           VerticalOptions="Center" HeightRequest="120" WidthRequest="270"
+                           Aspect="Fill" />
+                    <StackLayout BackgroundColor="White">
+                        <Label Text="Login"
+                               FontSize="41"
+                               FontFamily="Avenir-Black"
+                               Margin="0,0,0,0"
+                               HorizontalTextAlignment="Center"
+                               TextColor="Black"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+                        <Label Margin="10,10,10,0"
+                               Text="Please enter your username and password "
+                               FontSize="16"
+                               FontFamily="Avenir-Medium"
+                               TextColor="#707070"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               HorizontalTextAlignment="Center" />
+                        <StackLayout Margin="0,0,0,0">
+                            <Label Text="USERNAME"
+                                   Margin="5,50,0,-10"
+                                   FontSize="12"
+                                   TextColor="#EF701C"
+                                   FontFamily="Avenir-Black" Style="{StaticResource EntryLabelStyle}"/>
+                            <material:MaterialTextField x:Name="Username"
+                                                        InputType="Default"
+                                                        Text="{Binding UserName,Mode=TwoWay}"
+                                                        Margin="0,-8,0,10"
+                                                        TintColor="#EF701C"
+                                                        AlwaysShowUnderline="True"
+                                                        CardBackgroundColor="Transparent" />
+                            <Label Text="PASSWORD"
+                                   Margin="5,25,0,-10"
+                                   FontSize="12"
+                                   TextColor="#EF701C"
+                                   FontFamily="Avenir-Black" />
+                            <material:MaterialTextField x:Name="Password"
+                                                        InputType="Password"
+                                                        MaxLength="20"
+                                                        IsMaxLengthCounterVisible="False"
+                                                        Text="{Binding Password,Mode=TwoWay}"
+                                                        Margin="0,-8,0,0"
+                                                        TintColor="#EF701C"
+                                                        AlwaysShowUnderline="True"
+                                                        CardBackgroundColor="Transparent" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="16,0,0,0">
+                            <CheckBox IsChecked="{Binding IsCheck, Mode=TwoWay}" CheckedChanged="CheckBox_CheckedChanged"   ></CheckBox>
+                                <Label HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="I agree to " />
+                                        <Span Text="Terms and condition!"
+                                              TextColor="Blue"
+                                              TextDecorations="Underline">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                          CommandParameter="https://admin.rupaybachao.com/images/condition.pdf" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                        <Span Text=" of Rupay Bachao." />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <Button Command="{Binding LoginCommand}"
+                                Margin="50,25,50,5"
+                                Text="LOGIN"
+                                FontSize="20"
+                                CornerRadius="25"
+                                BackgroundColor="#EF701C"
+                                HorizontalOptions="Center"
+                                TextColor="White"
+                                FontFamily="Avenir-Black"                              
+                                VerticalOptions="Center"
+                                HeightRequest="48"
+                                WidthRequest="253"
+                                IsEnabled="{Binding LoginAllowed}"/>
+                        <Button Command="{Binding GuestCommand}"
+                                Margin="50,25,50,5"
+                                Text="GUEST LOGIN"
+                                FontSize="20"
+                                CornerRadius="25"
+                                BackgroundColor="#EF701C"
+                                HorizontalOptions="Center"
+                                TextColor="White"
+                                FontFamily="Avenir-Black"                              
+                                VerticalOptions="Center"
+                                HeightRequest="48"
+                                WidthRequest="253"
+                                IsEnabled="{Binding LoginAllowed}" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</views:MvxContentPage>

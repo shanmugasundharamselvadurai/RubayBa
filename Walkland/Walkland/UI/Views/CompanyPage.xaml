@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.CompanyPage"
+                       x:TypeArguments="viewModels:CompanyPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                       xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid> 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <!--Top Navbar-->
+                <Grid Grid.Row="0" 
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                    <Image Source="goback.png"
+                           Grid.Column="0"
+                           Margin="15,45,20,20"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.ColumnSpan="2" Margin="40,20,10,0"
+                           Text="{Binding BrandName}"
+                           TextColor="White" BackgroundColor="Transparent"
+                           Style="{StaticResource HeaderLabel}"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand" />
+
+                        <!--<Button Margin="10,20,10,0"
+                               Grid.ColumnSpan="2"
+                               Command="{Binding OpenWebCommand}"
+                               Text="page"
+                               HorizontalOptions="EndAndExpand" 
+                                Style="{StaticResource ButtonStyle}" />-->   
+                </Grid>
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <Grid BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="180" />
+                        <RowDefinition Height="180"/>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Company With Review-->
+                    <StackLayout Grid.Row="0"
+                                 Grid.ColumnSpan="3"
+                                 Orientation="Horizontal"
+                                 Margin="20,0,20,0">
+                        <StackLayout Grid.Row="1"
+                                     Grid.Column="0"
+                                     Margin="0,10,0,0">
+                            <Frame Padding="0,0,0,0"
+                                   CornerRadius="0"
+                                   IsClippedToBounds="True"
+                                   BackgroundColor="White"
+                                   HasShadow="False"
+                                   HorizontalOptions="StartAndExpand">
+                                <Image Grid.Row="0"
+                                       Grid.Column="0"
+                                       Aspect="AspectFit"
+                                       HeightRequest="84"
+                                       Source="{Binding LogoStoragePath}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       WidthRequest="120"
+                                       Margin="0,0,0,0" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical"
+                                     HorizontalOptions="Center">
+                            <StackLayout Margin="20,20,0,0"
+                                         Grid.Row="0"
+                                         Grid.Column="1">
+
+                                <!--Star Rating-->
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="0,0,0,0">
+                                    <rating:SfRating x:Name="rating"
+                                                     ItemCount="5"
+                                                     Value="{Binding Rating}"
+                                                     Precision="Exact"
+                                                     ReadOnly="true"
+                                                     ItemSize="22"
+                                                     Margin="0,0,5,0">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="#f6cb61"
+                                                                     UnRatedFill="White"
+                                                                     RatedStrokeWidth="1"
+                                                                     UnRatedStrokeWidth="2" />
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                    <Label Text="{Binding Rating, StringFormat='{}{0:N1}'}"
+                                           TextColor="Black"
+                                           FontSize="16"
+                                           Margin="0,2,0,0" />
+                                </StackLayout>
+                                <StackLayout>
+                                    <Label Text="Write a Review"
+                                           FontSize="20"
+                                           TextColor="#EF701C"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Start"
+                                           Margin="5,10,0,0">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NavigateToReviewPageCommand}"
+                                                                  NumberOfTapsRequired="1" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+
+                <!--Products-->
+               <StackLayout Grid.Row="1" Grid.ColumnSpan="3">
+                         <BoxView Grid.Row="1"
+                                     Grid.ColumnSpan="3"
+                                     HeightRequest="9"
+                                     WidthRequest="1"
+                                     BackgroundColor="#E9E0E0" />
+                       <Label Margin="24,0,24,0"
+                               FontSize="16" 
+                               Text="Products"
+                               TextColor="#2E2E2E"
+                               FontFamily="Poppins-SemiBold" />
+                        <CollectionView x:Name="ProductLists"
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="3"
+                                        Margin="0,0,0,0"
+                                        HorizontalScrollBarVisibility="Never"
+                                        ItemsSource="{Binding ProductList}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="CollectionView_ProductSelectionChanged"
+                                        SelectionChangedCommand="{Binding ProductTappedCommand}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductLists}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="10"
+                                                   Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="White" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <pancake:PancakeView CornerRadius="0"
+                                                             Padding="0,0,0,0"
+                                                             Margin="10,0,0,0">
+                                            <Grid ColumnDefinitions="auto, auto"
+                                                  RowDefinitions="auto,auto">
+                                                <StackLayout Padding="10,10,10,0">
+                                                    <Frame CornerRadius="25"
+                                                           IsClippedToBounds="True"
+                                                           Padding="0,0,0,0"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           HasShadow="False">
+                                                        <Image HeightRequest="50"
+                                                               WidthRequest="50"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               Source="{Binding ProductStoragePath, Converter={StaticResource ImageConverter}}"
+                                                               VerticalOptions="CenterAndExpand"
+                                                               Aspect="AspectFill" />
+                                                    </Frame>
+                                                </StackLayout>
+                                                <Label Grid.Row="1"
+                                                       Grid.ColumnSpan="2"
+                                                       FontAttributes="Bold"
+                                                       FontSize="14"
+                                                       Text="{Binding Name}"
+                                                       WidthRequest="10"
+                                                       LineBreakMode="WordWrap"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E"
+                                                       Margin="0,10,0,0" />
+                                            </Grid>
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                          <BoxView Grid.Row="1"
+                                     Grid.ColumnSpan="3"
+                                     HeightRequest="9"
+                                     WidthRequest="1"
+                                     BackgroundColor="#E9E0E0" />
+                    </StackLayout>
+
+                    <!--Company Location-->
+                 <StackLayout Grid.Row="2" Grid.ColumnSpan="3">
+                       <Label Margin="24,0,24,0"
+                               FontSize="16"
+                               Text="Company Location"
+                               TextColor="#2E2E2E"
+                               FontFamily="Poppins-SemiBold" />
+                        <CollectionView x:Name="companylocation"
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="3"
+                                        Margin="0,0,0,0"
+                                        HorizontalScrollBarVisibility="Never"
+                                        ItemsSource="{Binding productCompanyLoca}"
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding selectedLocation}"
+                                        SelectionChanged="companylocation_SelectionChanged"
+                                        SelectionChangedCommand="{Binding CompanyTappedCommand}"
+                                       >
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="10"
+                                                   Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="White" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <pancake:PancakeView CornerRadius="0"
+                                                             Padding="0,0,0,0"
+                                                             Margin="10,0,0,0">
+                                            <Grid ColumnDefinitions="auto, auto"
+                                                  RowDefinitions="auto,auto">
+
+                                                <StackLayout Margin="10,10,10,10" >
+                                                            <Image HeightRequest="50"
+                                                               WidthRequest="50"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               Source="location.png"
+                                                               VerticalOptions="CenterAndExpand"
+                                                               Aspect="AspectFit" />
+                                                    <Frame CornerRadius="10" BackgroundColor="Transparent"
+                                                           IsClippedToBounds="True"  WidthRequest="150" HeightRequest="100"
+                                                           Padding="0,0,0,0" VerticalOptions="FillAndExpand"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           HasShadow="False">
+
+                                                 
+
+                                                       <Label Grid.Row="1"
+                                                       Grid.ColumnSpan="2"
+                                                       FontAttributes="Bold"
+                                                       FontSize="14"
+                                                       Text="{Binding  LocationName}"
+                                                       LineBreakMode="WordWrap"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E"
+                                                       Margin="0,10,0,0" />
+                                                    </Frame>
+                                                   
+                                                </StackLayout>
+                                               
+                                            </Grid>
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                   <!--Company Offers-->
+         
+                    <BoxView Grid.Row="3"  
+                             Grid.ColumnSpan="3"
+                             HeightRequest="1"
+                             WidthRequest="1"
+                             BackgroundColor="#E9E0E0"/>
+                    <pancake:PancakeView Grid.Row="3" 
+                                         Grid.ColumnSpan="3"
+                                         Padding="0" 
+                                         CornerRadius="0"
+                                         Margin="0,8,0,0">
+                        <StackLayout Grid.Row="3"
+                                     Grid.ColumnSpan="3"
+                                     BackgroundColor="White">
+                            <Label Grid.Row="3"
+                                   Grid.ColumnSpan="3"
+                                   FontSize="16"
+                                   Margin="20,10,20,0" IsVisible="{Binding IsVisbleCompanyOffer}"
+                                   Text="Company Offers"
+                                   TextColor="#2E2E2E"
+                                   FontFamily="Poppins-SemiBold"/>
+                            <CollectionView Margin="20,0,20,0" 
+                                            Grid.Row="3" 
+                                            Grid.ColumnSpan="3" x:Name="companyOffer"
+                                            HorizontalScrollBarVisibility="Never"
+                                            ItemsSource="{Binding CompanyOffer,Mode=TwoWay}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="10"
+                                                       Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <StackLayout>
+                                                <pancake:PancakeView CornerRadius="0"
+                                                                     Padding="2" 
+                                                                     BackgroundColor="#FFF"
+                                                                     IsClippedToBounds="True"
+                                                                     HorizontalOptions="CenterAndExpand">
+                                                    <StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   Text="Use Code:"
+                                                                   FontAttributes="Bold"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="18"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   TextColor="#EF701C" />
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   Text="{Binding Code}"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="18"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   TextColor="#2E2E2E" />
+                                                        </StackLayout>
+                                                        <StackLayout>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   TextColor="#180589"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="16" 
+                                                                   HorizontalTextAlignment="Start">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <FormattedString.Spans>
+                                                                            <Span Text="Offer: "
+                                                                                  TextColor="#EF701C"
+                                                                                  FontSize="16" />
+                                                                            <Span Text="{Binding Description}"
+                                                                                  TextColor="#2E2E2E"
+                                                                                  FontSize="16" />
+                                                                        </FormattedString.Spans>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   TextColor="#180589"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="16"
+                                                                   HorizontalTextAlignment="Start">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <FormattedString.Spans>
+                                                                            <Span Text="Min. Txn Amount: "
+                                                                                  TextColor="#EF701C"
+                                                                                  FontSize="16" />
+                                                                            <Span Text="{Binding MinimumTransactionAmount,StringFormat='₹ {0:0}'}"
+                                                                                  TextColor="#2E2E2E"
+                                                                                  FontSize="16" />
+                                                                        </FormattedString.Spans>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </pancake:PancakeView>
+                                            </StackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <BoxView Grid.Row="3"  IsVisible="{Binding IsVisbleRubay}"
+                                     Grid.ColumnSpan="3"
+                                     HeightRequest="9"
+                                     WidthRequest="1"
+                                     BackgroundColor="#E9E0E0" />
+                        </StackLayout>
+                    </pancake:PancakeView>
+                 <!-- offer-->
+                 <pancake:PancakeView Grid.Row="4"
+                                         Grid.ColumnSpan="3"
+                                         Padding="0"
+                                         CornerRadius="0"
+                                         Margin="0,8,0,0">
+                        <StackLayout Grid.Row="4"
+                                     Grid.ColumnSpan="3"
+                                     BackgroundColor="White">
+                            <Label Grid.Row="4"
+                                   Grid.ColumnSpan="3"
+                                   FontSize="16" IsVisible="{Binding IsVisbleRubay}"
+                                   Margin="20,10,20,0"
+                                   Text="Rupay Bachao Offers"
+                                   TextColor="#2E2E2E"
+                                   FontFamily="Poppins-SemiBold"/>
+
+                            <CollectionView Margin="20,0,20,0"
+                                            Grid.Row="4" 
+                                            Grid.ColumnSpan="3"
+                                            HorizontalScrollBarVisibility="Never"
+                                            ItemsSource="{Binding PlatformOffer}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="10"
+                                                       Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <StackLayout>
+                                                <pancake:PancakeView CornerRadius="5"
+                                                                     Padding="10"
+                                                                     BackgroundColor="#FFF"
+                                                                     IsClippedToBounds="True"
+                                                                     WidthRequest="350"
+                                                                     HeightRequest="85"
+                                                                     HorizontalOptions="CenterAndExpand">
+                                                    <StackLayout>
+                                                        <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVisbleRubay}">
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   Text="Use Code:"
+                                                                   FontAttributes="Bold"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="18"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   TextColor="#EF701C" />
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   Text="{Binding Code}"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="18"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   TextColor="#2E2E2E" />
+                                                        </StackLayout>
+                                                        <StackLayout>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   TextColor="#180589"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="16"
+                                                                   HorizontalTextAlignment="Start">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <FormattedString.Spans>
+                                                                            <Span Text="Offer: "
+                                                                                  TextColor="#EF701C"
+                                                                                  FontSize="16" />
+                                                                            <Span Text="{Binding Description}"
+                                                                                  TextColor="#2E2E2E"
+                                                                                  FontSize="16" />
+                                                                        </FormattedString.Spans>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.ColumnSpan="2"
+                                                                   TextColor="#180589"
+                                                                   Margin="0,0,10,0"
+                                                                   FontSize="16"
+                                                                   HorizontalTextAlignment="Start">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <FormattedString.Spans>
+                                                                            <Span Text="Min. Txn Amount: "
+                                                                                  TextColor="#EF701C"
+                                                                                  FontSize="16" />
+                                                                            <Span Text="{Binding MinimumTransactionAmount,StringFormat='₹ {0:0}'}"
+                                                                                  TextColor="#2E2E2E"
+                                                                                  FontSize="16" />
+                                                                        </FormattedString.Spans>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </pancake:PancakeView>
+                                            </StackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </pancake:PancakeView>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

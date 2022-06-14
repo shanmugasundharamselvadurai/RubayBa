@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:Walkland.UI.Converters"
+             x:Class="Walkland.App">
+   <Application.Resources>
+        <ResourceDictionary>
+            <!--Entry Label Style-->
+            <Style x:Key="EntryLabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="TextColor"
+                        Value="#EF701C" />
+                <Setter Property="FontFamily"
+                        Value="Avenir-Black" />
+            </Style>
+            <!--Label Style-->
+            <Style x:Key="LabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontFamily"
+                        Value="Avenir-Black" />
+            </Style>
+            <!--Entry Style-->
+            <Style x:Key="EntryStyle"
+                   TargetType="Entry">
+                <Setter Property="FontFamily"
+                        Value="Avenir-Black" />
+                <Setter Property="TextTransform"
+                        Value="None" />
+                <Setter Property="FontSize"
+                        Value="18" />
+                <Setter Property="TextColor"
+                        Value="Black" />
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="PlaceholderColor"
+                        Value="Transparent" />
+            </Style>
+            <!--Button Style-->
+            <Style x:Key="ButtonStyle"
+                   TargetType="Button">
+                <Setter Property="FontFamily"
+                        Value="Avenir-Black" />
+                <Setter Property="HeightRequest"
+                        Value="50" />
+                <Setter Property="TextTransform"
+                        Value="Uppercase" />
+                <Setter Property="FontSize"
+                        Value="21" />
+                <Setter Property="CornerRadius"
+                        Value="38" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="BackgroundColor"
+                        Value="#EF701C" />
+            </Style>
+            <Style x:Key="HeaderLabel"
+                   TargetType="Label">
+                <Setter Property="FontFamily"
+                        Value="Avenir-Black" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="TextColor"
+                        Value="#FFFFFF" />
+               
+            </Style>
+            
+            <converters:BannerImageConverter x:Key="BannerImageConverter" />
+            <converters:ImageConverter x:Key="ImageConverter" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:TransactionDateTimeConverter x:Key="TransactionDateTimeConverter" />
+            <converters:TransactionAmountColourConverter x:Key="TransactionAmountColourConverter" />
+            <converters:TransactionAmountBackgroupColourConverter x:Key="TransactionAmountBackgroupColourConverter" />
+            <converters:TransactionAmountConverter x:Key="TransactionAmountConverter" />
+            <converters:TransactionCompanyConverter x:Key="TransactionCompanyConverter" />
+          
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

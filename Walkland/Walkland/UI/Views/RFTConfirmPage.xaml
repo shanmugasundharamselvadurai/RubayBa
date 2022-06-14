@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.RFTConfirmPage"
+                       x:TypeArguments="viewModels:RFTConfirmPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid BackgroundColor="White"  Margin="{OnPlatform Android='0,0,0,0', iOS='0,50,0,0'}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!--Top Nav Bar-->
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                    <Image Source="goback.png"
+                           Margin="20,20,20,20"
+                           Grid.Column="0"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Confirm"
+                           TextColor="#FFFFFF"
+                           Grid.ColumnSpan="2"
+                           FontFamily="Poppins-Bold"
+                           FontSize="25"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           Margin="0,0,0,0" />
+                </Grid>
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <Grid Margin="20,25,20,80">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3">
+                        <StackLayout Margin="10,0,10,0">
+                            <pancake:PancakeView CornerRadius="10">
+                                <Grid ColumnDefinitions="* , 2*, 7*,2*,* "
+                                      RowDefinitions="20,60,20"
+                                      BackgroundColor="#F8D6BD">
+                                    <Image Grid.Row="1"
+                                           Grid.Column="1"
+                                           Source="WalletGreenIcon.png" />
+                                    <StackLayout Grid.Row="1"
+                                                 Grid.Column="2">
+                                        <Label Text="{Binding RemainingAmount,StringFormat='{}{0:N2}'}"
+                                               Margin="0,0,0,-10"
+                                               TextColor="#2E2E2E"
+                                               FontSize="30"
+                                               FontFamily="Poppins-Bold"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               HorizontalTextAlignment="Start"
+                                               VerticalTextAlignment="Center" />
+                                        <Label Margin="0,0,0,0"
+                                               Text="AVAILABLE BALANCE"
+                                               TextColor="#707070"
+                                               FontFamily="Poppins-Medium"
+                                               FontSize="12"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                    <Grid Grid.Row="1"
+                                          Grid.Column="3"
+                                          RowDefinitions="*,4*,*">
+                                        <pancake:PancakeView Grid.Row="1"
+                                                             CornerRadius="10"
+                                                             BackgroundColor="#EF701C">
+                                            <Label Text="RFT"
+                                                   TextColor="White"
+                                                   FontFamily="Poppins-Medium"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center" />
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </Grid>
+                            </pancake:PancakeView>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="1"
+                          Grid.ColumnSpan="3">
+                        <StackLayout Orientation="Vertical"
+                                     Margin="10,0,10,0">
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="20,20,10,0">
+                                <Label Text="TO"
+                                       FontSize="14"
+                                       TextColor="#EF701C"
+                                       FontFamily="Poppins-SemiBold" />
+                                <StackLayout>
+                                    <Label Text="{Binding LegalName}"
+                                           FontSize="18"
+                                           TextColor="#656565"
+                                           Margin="0,-5,0,0" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding MobileNumber}"
+                                               FontSize="18"
+                                               TextColor="#656565"
+                                               Margin="0,-5,0,0" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="20,0,10,0">
+                                <Label Text="AMOUNT"
+                                       FontSize="14"
+                                       TextColor="#EF701C"
+                                       FontFamily="Poppins-SemiBold" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding PayAmount}"
+                                           FontSize="18"
+                                           TextColor="#656565" />
+                                    <Label Text="RFT"
+                                           FontSize="18"
+                                           TextColor="#656565" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="20,20,10,0">
+                                <Label Text="REASON"
+                                       FontSize="14"
+                                       TextColor="#EF701C"
+                                       FontFamily="Poppins-SemiBold" />
+                                <Label Text="{Binding Reason}"
+                                       FontSize="18"
+                                       TextColor="#656565" />
+                            </StackLayout>
+                            <Button Command="{Binding RFTConfirmCommand}"
+                                    Margin="50,20,50,0"
+                                    CornerRadius="25"
+                                    Text="Confirm"
+                                    Style="{StaticResource ButtonStyle}" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

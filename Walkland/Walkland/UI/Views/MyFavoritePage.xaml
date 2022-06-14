@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.MyFavoritePage"
+                       x:TypeArguments="viewModels:MyFavoritePageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"                   
+                       ios:Page.UseSafeArea="False"                     
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="#E9E0E0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" 
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+              
+                    <Image Source="goback.png"
+                           Grid.Column="0"
+                           Margin="20,45,20,20"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.Column="1"
+                           Text=" My Favorite" Margin="0,20,0,0"
+                           Style="{StaticResource HeaderLabel}"
+                           HorizontalOptions="CenterAndExpand" />
+                </Grid>
+                <!--My Favorite  Product List-->
+                <StackLayout Grid.Row="1"
+                             Grid.ColumnSpan="3"
+                             Margin="0,0,0,0"
+                             BackgroundColor="White">
+                    <CollectionView Grid.Row="1"
+                                    ItemsSource="{Binding FavoriteProduct}"
+                                    Margin="0,20,0,20"
+                                    x:Name="FavouriteProduct"
+                                    SelectionMode="Single"
+                                    SelectionChanged="CollectionView_FavouriteProductSelectionChanged"
+                                    SelectionChangedCommand="{Binding ProductTappedCommand}"
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference FavouriteProduct}}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,0"
+                                      Padding="0"
+                                      HeightRequest="{OnPlatform Android='130', iOS='150'}"
+                                      BackgroundColor="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Row="0"
+                                                 HorizontalOptions="CenterAndExpand"
+                                                 Orientation="Horizontal">
+                                        <StackLayout Grid.Column="0">
+                                            <Frame Padding="0"
+                                                   CornerRadius="0"
+                                                   IsClippedToBounds="True"
+                                                   HasShadow="False"
+                                                   BackgroundColor="White"
+                                                   HorizontalOptions="CenterAndExpand">
+                                                <Image Grid.Column="0"
+                                                       Aspect="AspectFit"
+                                                       HeightRequest="84"
+                                                       Source="{Binding ProductStoragePath,Converter={StaticResource ImageConverter}}"
+                                                       HorizontalOptions="Center"
+                                                       WidthRequest="150"
+                                                       Margin="0,15,0,0" />
+                                            </Frame>
+                                            <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="CenterAndExpand">
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     HorizontalOptions="Center">
+                                            <StackLayout Margin="20,10,0,0"
+                                                         Grid.Row="0"
+                                                         Grid.Column="1">
+                                                <Label FontSize="20"
+                                                       HorizontalOptions="StartAndExpand"
+                                                       FontAttributes="Bold"
+                                                       Text="{Binding Name}"
+                                                       MaxLines="2"
+                                                       TextColor="Black"
+                                                       VerticalOptions="StartAndExpand" />
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label>
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <FormattedString.Spans>
+                                                                    <Span Text="Sold By: " />
+                                                                    <Span Text="{Binding Company.BrandName}" />
+                                                                </FormattedString.Spans>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout>
+                                                <StackLayout Margin="20,0,0,0"
+                                                             Grid.Row="0"
+                                                             Grid.Column="1"
+                                                             Orientation="Horizontal">
+                                                    <Label>
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <FormattedString.Spans>
+                                                                    <Span Text="{Binding NewPrice,StringFormat='₹ {0:C0}'}"
+                                                                          FontSize="18"
+                                                                          TextColor="#0F8146"
+                                                                          FontAttributes="Bold" />
+                                                                    <Span Text="   " />
+                                                                    <Span Text="{Binding OldPrice}"
+                                                                          FontSize="14"
+                                                                          TextColor="#A5A5A5"
+                                                                          FontAttributes="Bold"
+                                                                          TextDecorations="Strikethrough" />
+                                                                </FormattedString.Spans>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <BoxView Grid.Row="2"
+                                             Grid.ColumnSpan="3"
+                                             WidthRequest="1"
+                                             HeightRequest="1"
+                                             Color="#E9E0E0"
+                                             Margin="{OnPlatform Android='0,22,0,8', iOS='0,25,0,10'}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

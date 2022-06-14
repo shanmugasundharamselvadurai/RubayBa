@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+      x:TypeArguments="viewModels:NearByLocationPageViewModel"
+       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+      xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+       xmlns:custom="clr-namespace:Walkland.Core.PlacesSearchBar"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="UI.Views.NearByLocationPage">
+   <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="White" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                    <Image Source="goback.png"
+                           Grid.Column="0"
+                           Margin="15,50,20,20"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <custom:PlacesBar Grid.ColumnSpan="2"
+                                      x:Name="search_bar"
+                                      Placeholder="Type your search here..."
+                                      FontAttributes="Italic"
+                                      Margin="55,45,20,5" BackgroundColor="White"
+                                      CancelButtonColor="#EF701C" />
+                </Grid>
+                <Grid Grid.Row="1"
+                      Grid.ColumnSpan="3">
+                    <StackLayout>
+                        <AbsoluteLayout>
+                            <ActivityIndicator x:Name="spinner"
+                                               IsRunning="false"
+                                               AbsoluteLayout.LayoutBounds="0.5, 0.1, 50, 50"
+                                               AbsoluteLayout.LayoutFlags="PositionProportional" />
+                            <ListView x:Name="results_list"
+                                      IsVisible="false"
+                                      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                      AbsoluteLayout.LayoutFlags="SizeProportional">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextCell TextColor="#EF701C" Text="{Binding MainText}"
+                                                  Detail="{Binding SecondaryText}" />
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </AbsoluteLayout>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.ProductDetailPage"
+                       x:TypeArguments="viewModels:ProductDetailPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       ios:Page.UseSafeArea="False" 
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="WhiteSmoke">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="footerBtn"
+                   TargetType="Button">
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="Padding"
+                        Value="20" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="TranslationY"
+                        Value="80" />
+                <Setter Property="CornerRadius"
+                        Value="0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid> 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="WhiteSmoke"
+                  Grid.ColumnSpan="3">
+                <ImageButton Grid.Column="0"
+                             Source="gobackdark.png"
+                             Margin="20,45,20,0"
+                             Command="{Binding NavigateBackCommand}"
+                             BackgroundColor="Transparent"
+                             HeightRequest="25"
+                             WidthRequest="25"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Start" />
+
+                       <Image Source="homedark.png"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                   Margin="20,45,20,20"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CompanyDetailPageCommand}"
+                                                          NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                <!--Favourite Product-->
+                <StackLayout Orientation="Vertical"
+                             Grid.Row="0"
+                             Grid.Column="4">
+                    <Image Source="Like.png"
+                           IsVisible="{Binding IsFavoriteProduct}"
+                           Grid.Row="0"
+                           Grid.Column="4"
+                           Margin="23,45,23,23"
+                           BackgroundColor="Transparent">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RemoveFromFavorite }"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="Unlike.png"
+                           IsVisible="{Binding IsFavoriteProduct, Converter={StaticResource InverseBoolConverter }}"
+                           Margin="23,45,23,23"
+                           Grid.Row="0"
+                           Grid.Column="2"
+                           BackgroundColor="Transparent">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddToFavorite}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    
+                </StackLayout>
+            </Grid>
+            <ScrollView Grid.Row="1"
+                        Grid.ColumnSpan="3">
+                <Grid RowSpacing="0" Padding="5,0,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0"
+                           Grid.ColumnSpan="3"
+                           Source="{Binding ImagePath}"
+                           Aspect="AspectFit"
+                           HorizontalOptions="FillAndExpand"
+                           Margin="0,0,0,0"
+                           BackgroundColor="Transparent" />
+                    <Grid Grid.Row="1"
+                          RowSpacing="0"
+                          Grid.ColumnSpan="3"
+                          Margin="20,20,20,0">
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Grid.ColumnSpan="2"
+                                         Orientation="Horizontal">
+                                <StackLayout Grid.ColumnSpan="2">
+                                    <Label Grid.ColumnSpan="2"
+                                           WidthRequest="270"
+                                           TextColor="#2E2E2E"
+                                           FontSize="24"
+                                           Text="{Binding Name}"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="StartAndExpand" />
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="Sold By: "
+                                                          TextColor="#A5A5A5" />
+                                                    <Span Text="{Binding BrandName}"
+                                                          TextColor="#2E2E2E" />
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2"
+                                             Orientation="Vertical"
+                                             HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding NewPrice,StringFormat='₹ {0:C0}'}"
+                                           FontSize="24"
+                                           TextColor="#0F8146"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding OldPrice,StringFormat='₹ {0:C0}'}"
+                                           FontSize="18"
+                                           TextColor="#A5A5A5"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextDecorations="Strikethrough" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout >
+                                <Label TextColor="#656565"  
+                                       LineBreakMode="WordWrap"
+                                       FontSize="16"
+                                       LineHeight="1.2"
+                                       Text="{Binding ProductDescription}"
+                                       HorizontalOptions="StartAndExpand"
+                                       Margin="0,0,0,0" />
+                                <Button Margin="50,20,50,0" IsVisible="{Binding IsVibile}"
+                                        Command="{Binding OpenWebCommand}"
+                                        CornerRadius="25"
+                                        Text="Buy Now"
+                                        Style="{StaticResource ButtonStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          RowSpacing="0"
+                          Grid.ColumnSpan="3"
+                          Margin="20,0,20,0">
+                        <StackLayout Grid.ColumnSpan="3"
+                                     Margin="0,0,0,0">
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

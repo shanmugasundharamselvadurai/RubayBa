@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"                    
+                       xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                       xmlns:dataSelector="clr-namespace:Walkland.UI.DataTemplateSelectors"
+                       x:Class="Walkland.UI.Views.CompanyWalletPage"
+                       x:TypeArguments="viewModels:CompanyWalletPageViewModel"
+                       ios:Page.UseSafeArea="False"
+                       Title="WALLET"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.IconImageSource>
+        <FileImageSource File="Iconwalletwhite.png" />
+    </ContentPage.IconImageSource>
+    <!--<ContentPage.Resources>
+        <DataTemplate x:Key="CreditTransactionTemplate">
+
+        </DataTemplate>
+        <DataTemplate x:Key="DebitTransactionTemplate">
+
+        </DataTemplate>
+        <dataSelector:TransactionTemplateSelector x:Key="TransactionSelector"
+                                             CreditTransaction="{StaticResource CreditTransactionTemplate}"
+                                             DebitTransaction="{StaticResource DebitTransactionTemplate}" />
+    </ContentPage.Resources>-->
+    <ContentPage.Content>
+
+         <StackLayout>
+
+            <Grid ColumnDefinitions="*,*,*"
+                  RowDefinitions="100,20,80,20,50,35"
+                  BackgroundColor="#FAFAFA">
+                <!--Top Nav Bar-->
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                    <Label Text="Wallet"
+                           TextColor="#FFFFFF"
+                           FontFamily="Poppins-Bold"
+                           FontSize="25" Margin="0,20,0,0"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                         />
+                </Grid>
+                <!--Points Display Box-->
+                <StackLayout Margin="30,20,30,0"
+                             Grid.ColumnSpan="3"
+                             Grid.Row="2"
+                             Grid.RowSpan="3">
+                    <pancake:PancakeView CornerRadius="10">
+                        <Grid ColumnDefinitions="* , 2*, 7*,2*,* "
+                              RowDefinitions="20,60, 20 ,50"
+                              BackgroundColor="#F8D6BD">
+                            <Image Grid.Row="1"
+                                   Grid.Column="1"
+                                   Source="WalletGreenIcon.png" />
+                            <StackLayout Grid.Row="1"
+                                         Grid.Column="2">
+                                <Label Text="{Binding WalletBalance, StringFormat='{}{0:N2}'}"
+                                       Margin="0,0,0,-10"
+                                       TextColor="#2E2E2E"
+                                       FontSize="30"
+                                       FontFamily="Poppins-Bold"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center" />
+                                <Label Margin="5,0,0,0"
+                                       Text="AVAILABLE BALANCE"
+                                       TextColor="#707070"
+                                       FontFamily="Poppins-Medium"
+                                       FontSize="12"
+                                       HorizontalTextAlignment="Center" />
+                            </StackLayout>
+                            <Grid Grid.Row="1"
+                                  Grid.Column="3"
+                                  RowDefinitions="*,4*,*">
+                                <pancake:PancakeView Grid.Row="1"
+                                                     CornerRadius="10"
+                                                     BackgroundColor="#EF701C">
+                                    <Label Text="RFT"
+                                           TextColor="White"
+                                           FontFamily="Poppins-Medium"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center" />
+                                </pancake:PancakeView>
+                            </Grid>
+                            <Button Command="{Binding PayCommand}"
+                                    Grid.Row="3"
+                                    Grid.ColumnSpan="5"
+                                    Text="PAY"
+                                    TextColor="#FFFFFF"
+                                    FontSize="16"
+                                    FontFamily="Avenir-Black"
+                                    BackgroundColor="#DA0202" />
+                        </Grid>
+                    </pancake:PancakeView>
+                </StackLayout>
+      
+            </Grid>
+            <!--Companies List-->
+            <StackLayout Margin="20,0,20,0">
+                <CollectionView x:Name="listTransactions"
+                                EmptyView="No Transaction History"
+                                HorizontalScrollBarVisibility="Never"
+                                ItemsSource="{Binding CompanyWalletTransactions}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="6,0,6,4"
+                                  BackgroundColor="White"
+                                  ColumnDefinitions="3*,*,3*"
+                                  RowDefinitions="10,40,35,2">
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Text="{Binding ., Converter={StaticResource TransactionCompanyConverter}}"
+                                       TextColor="#707070"
+                                       FontAttributes="Bold"
+                                       FontSize="23"
+                                       MaxLines="1" />
+                                <StackLayout Grid.Row="2"
+                                             Grid.ColumnSpan="2"
+                                             Orientation="Horizontal"
+                                             Spacing="0">
+                                    <Label Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="Txn Id:"
+                                           TextColor="#AFAEAE"
+                                           FontSize="14"
+                                           HorizontalOptions="StartAndExpand"
+                                           Margin="0,15,0,0" />
+                                    <Label Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding TransactionId}"
+                                           TextColor="#AFAEAE"
+                                           FontSize="14"
+                                           HorizontalOptions="StartAndExpand"
+                                           Margin="0,15,0,0" />
+                                </StackLayout>
+                                <pancake:PancakeView CornerRadius="5"
+                                                     Grid.Row="1"
+                                                     Grid.Column="2"
+                                                     BackgroundColor="{Binding ., Converter={StaticResource TransactionAmountBackgroupColourConverter}}"
+                                                     Padding="0,0,0,0"
+                                                     Margin="40,0,0,0">
+                                    <Label Grid.Row="1"
+                                           Grid.Column="2"
+                                           Text="{Binding ., Converter={StaticResource TransactionAmountConverter}}"
+                                           TextColor="{Binding ., Converter={StaticResource TransactionAmountColourConverter}}"
+                                           FontSize="22"
+                                           FontFamily="Poppins-Bold"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Margin="0,0,0,0" />
+                                </pancake:PancakeView>
+                                <Label Grid.Row="2"
+                                       Grid.Column="2"
+                                       Text="RFT"
+                                       TextColor="#AFAEAE"
+                                       FontSize="14"
+                                       HorizontalOptions="EndAndExpand" />
+                                <Label Grid.Row="2"
+                                       Grid.Column="2"
+                                       Text="{Binding CreatedDateTimeUtc, Converter={StaticResource TransactionDateTimeConverter}}"
+                                       TextColor="#AFAEAE"
+                                       FontSize="14"
+                                       HorizontalOptions="EndAndExpand"
+                                       Margin="0,15,0,0" />
+                                <BoxView Grid.Row="3"
+                                         Grid.ColumnSpan="3"
+                                         Color="#F6F6F6"
+                                         HeightRequest="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+         </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

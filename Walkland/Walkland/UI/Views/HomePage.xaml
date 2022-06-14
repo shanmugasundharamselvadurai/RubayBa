@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.HomePage"
+                       x:TypeArguments="viewModels:HomePageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                       ios:Page.UseSafeArea="False"
+                       Title="HOME"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.IconImageSource>
+        <FileImageSource File="Iconhome.png" />
+    </ContentPage.IconImageSource>
+    <ContentPage.Content>
+
+       <StackLayout>
+                 <RefreshView IsRefreshing="{Binding IsRefreshing}" Command ="{Binding RefreshCommand}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--Navigation Bar-->
+            <Grid Grid.Row="0"
+                  Margin="{OnPlatform Android='15,0,15,0', iOS='15,20,15,0'}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="bellicon.png"
+                       MinimumHeightRequest="10"
+                       Margin="{OnPlatform Android='0,25,30,20', iOS='0,30,30,20'}"
+                      HorizontalOptions="Start"
+                          HeightRequest="10" WidthRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NotificationPageCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="SplashIcon.png"
+                           Grid.Column="1"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           HeightRequest="180"
+                           WidthRequest="180" />
+                    <Image Grid.Column="2"
+                           Source="serachicon.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           HorizontalOptions="EndAndExpand"
+                           Margin="0,0,0,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SearchCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+               
+                <!--1st Show User Location Row-->
+                <pancake:PancakeView Grid.Row="1"
+                                     Grid.ColumnSpan="3"
+                                     CornerRadius="5">
+                    <StackLayout BackgroundColor="#EDEDED"
+                                 Orientation="Horizontal">
+                        <Image Source="pin.png"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               HorizontalOptions="Start"
+                               Margin="10,0,2,0" />
+                        <Label VerticalOptions="Center"
+                               TextColor="#514F4F"
+                               FontSize="18"
+                               MaxLines="1">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding SubLocality}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding Locality}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding AdminArea}" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NearbyLocationTappedCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </pancake:PancakeView>
+            </Grid>
+
+            <ScrollView Grid.Row="1">
+    
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="250" />
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="180" />
+                        <RowDefinition Height="180" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--2nd Carousel View -->
+                    <StackLayout Grid.Row="0"
+                                 Grid.ColumnSpan="3"
+                                 Margin="15,20,15,0">
+                        <CarouselView x:Name="BannerImagesCarouselView"
+                                      ItemsSource="{Binding AppBanners}"
+                                      Position="{Binding CarouselPosition,Mode=TwoWay}"
+                                      IndicatorView="indicatorView">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <pancake:PancakeView CornerRadius="5">
+                                        <StackLayout>
+                                            <Frame HasShadow="False"
+                                                   CornerRadius="10"
+                                                   Margin="0,10,0,0"
+                                                   Padding="1"
+                                                   HeightRequest="190"
+                                                   WidthRequest="380"
+                                                   IsClippedToBounds="True">
+                                                <Image Source="{Binding Converter={StaticResource BannerImageConverter}}"
+                                                       Aspect="AspectFill"
+                                                       HeightRequest="180"
+                                                       WidthRequest="150"
+                                                       HorizontalOptions="FillAndExpand">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.BannerDetailItemPageCommand, Source={x:Reference BannerImagesCarouselView}}"
+                                                                              NumberOfTapsRequired="1" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Frame>
+                                        </StackLayout>
+                                    </pancake:PancakeView>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView x:Name="indicatorView"
+                                       IndicatorColor="LightGray"
+                                       IndicatorSize="10"
+                                       SelectedIndicatorColor="DarkGray"
+                                       HorizontalOptions="Center"
+                                       Margin="0,0,0,0" />
+                    </StackLayout>
+                    <!--3th row CategoryCarousel-->
+                    <StackLayout Grid.Row="1"
+                                 Grid.ColumnSpan="3">
+                        <!--<Label Margin="24,0,24,0"
+                               FontSize="19"
+                               Text="Suppliers"
+                               TextColor="#2E2E2E"
+                               FontFamily="Avenir-Black" />-->
+                        <CollectionView x:Name="companylist"
+                                        Grid.Row="3"
+                                        Grid.ColumnSpan="3"
+                                        Margin="0,0,0,0"
+                                        HorizontalScrollBarVisibility="Never"
+                                        ItemsSource="{Binding CompanyCategories}"
+                                        SelectionMode="Single" 
+                                        SelectionChanged="CollectionView_CompanyCategorySelectionChanged"
+                                        SelectionChangedCommand="{Binding CompanyCategoryItemTappedCommand}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference companylist}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="10"
+                                                   Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="White" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <pancake:PancakeView CornerRadius="0" WidthRequest="100" HeightRequest="100" VerticalOptions="FillAndExpand" HorizontalOptions="Center"
+                                                             Padding="0,0,0,0"
+                                                             Margin="0,0,0,0">
+                                            <Grid ColumnDefinitions="auto, 3"
+                                                  RowDefinitions="auto,auto">
+                                                <StackLayout Margin="15,10,10,0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                                                    <Frame CornerRadius="25" 
+                                                           IsClippedToBounds="True"
+                                                           Padding="0,0,0,0"
+                                                           Margin="10"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           HasShadow="False">
+                                                        <Image HeightRequest="50"
+                                                               WidthRequest="50"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               Source="{Binding CompanyCategoryStoragePath, Converter={StaticResource ImageConverter}}"
+                                                               VerticalOptions="EndAndExpand"
+                                                               Aspect="AspectFill" />
+                                                    </Frame>
+                                                </StackLayout>
+                                                <Label Grid.Row="1"
+                                                       Grid.ColumnSpan="2"
+                                                       FontAttributes="Bold"
+                                                       FontSize="Small"
+                                                       Text="{Binding Name}"
+                                                       LineBreakMode="WordWrap"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E"
+                                                       Margin="0,10,0,0" />
+                                            </Grid>
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <!--4th row-->
+                    <StackLayout Grid.Row="2"
+                                 Grid.ColumnSpan="3">
+                        <Label Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               Margin="24,20,24,0"
+                               Text="Latest Deals"
+                               FontSize="19"
+                               TextColor="#2E2E2E"
+                               FontFamily="Avenir-Black" />
+                        <CollectionView Margin="10,0,10,0" 
+                                        x:Name="latestdeal"
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="3"
+                                        HorizontalScrollBarVisibility="Never"
+                                        ItemsSource="{Binding LatestDeals}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="CollectionView_LatestDealSelectionChanged"
+                                        SelectionChangedCommand="{Binding LatestDealItemTappedCommand}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference latestdeal}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="5"
+                                                   Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="White" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <pancake:PancakeView Padding="0,0,0,0"
+                                                             CornerRadius="1">
+                                            <Grid ColumnDefinitions="auto, *"
+                                                  RowDefinitions="auto">
+                                                <Label Grid.Row="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Margin="0,0,10,0"
+                                                       FontSize="10"
+                                                       Text="{Binding Name}"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E" />
+
+                                                <StackLayout Orientation="Vertical" Margin="5,0,5,5">
+                                                   <StackLayout>
+
+                                                       <Frame CornerRadius="5" 
+                                                           Padding="0" HasShadow="True" BackgroundColor="White"
+                                                           HorizontalOptions="FillAndExpand">
+                                                        <Image  WidthRequest="150"
+                                                               HeightRequest="100"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               Source="{Binding PictureStoragePath, Converter={StaticResource ImageConverter}}"
+                                                               VerticalOptions="Start"
+                                                               Aspect="AspectFit" />
+                                                        </Frame>
+                                                  </StackLayout>
+
+                                                    <Label Grid.Row="0" 
+                                                       Grid.ColumnSpan="2"
+                                                       FontSize="12"
+                                                       Text="{Binding Company.BrandName}"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E" />
+                                                 </StackLayout>
+
+                                            </Grid>
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <!--5th row-->
+                    <StackLayout Grid.Row="3"
+                                 Grid.ColumnSpan="3">
+                        <Label Grid.Row="3"
+                               Grid.ColumnSpan="3"
+                               Margin="24,0,24,0"
+                               Text="Near Me"
+                               FontSize="19"
+                               TextColor="#2E2E2E"
+                               FontFamily="Avenir-Black" />
+                        <CollectionView Margin="10,0,0,0"
+                                        Grid.Row="6"
+                                        Grid.ColumnSpan="3"
+                                        HorizontalScrollBarVisibility="Never"
+                                        ItemsSource="{Binding FiveNearbyCompanies}"
+                                        x:Name="nearbyLocation"                                      
+                                        SelectionMode="Single"
+                                        SelectionChanged="CollectionView_NearbyLocationSelectionChanged"
+                                        SelectionChangedCommand="{Binding NearbyCompanyStoreCommand}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference nearbyLocation}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="5"
+                                                   Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="White" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <pancake:PancakeView Padding="0,10,0,0"
+                                                             CornerRadius="1">
+                                            <Grid ColumnDefinitions="auto, *"
+                                                  RowDefinitions="auto">
+                                                <Label Grid.Row="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Margin="0,0,0,0"
+                                                       FontSize="16"
+                                                       Text="{Binding ContactPerson}"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E" />
+                                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"> 
+                                                    <Frame CornerRadius="5" 
+                                                           Padding="0" HasShadow="True" BackgroundColor="White"
+                                                           HorizontalOptions="FillAndExpand">
+                                                        <Image
+                                                               WidthRequest="150"
+                                                               HeightRequest="100"
+                                                               HorizontalOptions="CenterAndExpand"
+                                                               Aspect="AspectFit"
+                                                               Source="{Binding Company.LogoStoragePath,Converter={StaticResource ImageConverter}}"
+                                                               VerticalOptions="Start" />
+
+                                                    </Frame>
+
+                                                       <Label Grid.Row="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Margin="0,0,0,0"
+                                                       FontSize="12"
+                                                       Text="{Binding LocationName}"
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#2E2E2E" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <CollectionView.EmptyView>
+                                <ContentView>
+                                    <StackLayout HorizontalOptions="CenterAndExpand"
+                                                 VerticalOptions="CenterAndExpand">
+                                        <Label Text="No Nearby Company Found."
+                                               Margin="10,25,10,10"
+                                               FontAttributes="Bold"
+                                               FontSize="18"
+                                               HorizontalOptions="Fill"
+                                               HorizontalTextAlignment="Center" />
+                                    </StackLayout>
+                                </ContentView>
+                            </CollectionView.EmptyView>
+                        </CollectionView>
+                    </StackLayout>
+                </Grid>
+        </ScrollView>
+        </Grid>
+    </RefreshView>
+   </StackLayout>
+
+   </ContentPage.Content>
+</views:MvxContentPage>

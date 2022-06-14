@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.SendPage"
+                       x:TypeArguments="viewModels:SendPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                       xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+
+           <StackLayout>
+                <Grid ColumnDefinitions="*,*,*"
+                      RowDefinitions="100,*,*,*,*"
+                      BackgroundColor="#FAFAFA">
+                    <!--Top Nav Bar-->
+                    <StackLayout Grid.Row="0"
+                                 Grid.ColumnSpan="3"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="#EF701C">
+                        <Image Source="goback.png"
+                               Margin="20,45,20,20"
+                               Grid.Column="0"
+                               HeightRequest="25"
+                               WidthRequest="25"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer  mvx:Bi.nd="Command NavigateBackCommand"
+                                                       NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Send"
+                               TextColor="#FFFFFF"
+                               Grid.ColumnSpan="2"
+                               FontFamily="Avenir-Black"
+                               FontSize="25"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center"
+                               VerticalTextAlignment="Center"
+                               Margin="100,20,0,0" />
+                    </StackLayout>
+                </Grid>
+
+               <StackLayout>
+
+               <ScrollView>
+               <StackLayout>
+
+                 <StackLayout Margin="30,0,30,0"
+                             Grid.ColumnSpan="3"
+                             Grid.Row="1"
+                             Grid.RowSpan="2">
+  
+                    <pancake:PancakeView CornerRadius="10">
+                        <Grid ColumnDefinitions="* , 2*, 7*,2*,* "
+                              RowDefinitions="20,60, 20"
+                              BackgroundColor="#F8D6BD">
+                            <Image Grid.Row="1"
+                                   Grid.Column="1"
+                                   Source="WalletGreenIcon.png" />
+                            <StackLayout Grid.Row="1"
+                                         Grid.Column="2">
+                                <Label 
+                                       Text="{Binding WalletBalance, StringFormat='{}{0:N2}'}"
+                                       Margin="0,0,0,-10"
+                                       TextColor="#2E2E2E"
+                                       FontFamily="Avenir-Black"
+                                       FontSize="30"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center" />
+                                <Label Margin="0,0,0,0"
+                                       Text="AVAILABLE BALANCE"
+                                       TextColor="#707070"
+                                       FontFamily="Avenir-Medium"
+                                       FontSize="12"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </StackLayout>
+                            <Grid Grid.Row="1"
+                                  Grid.Column="3"
+                                  RowDefinitions="*,4*,*">
+                                <pancake:PancakeView Grid.Row="1"
+                                                     CornerRadius="10"
+                                                     BackgroundColor="#EF701C">
+                                    <Label Text="RFT"
+                                           TextColor="White"
+                                           FontFamily="Avenir-Medium"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center" />
+                                </pancake:PancakeView>
+                            </Grid>
+                        </Grid>
+                    </pancake:PancakeView>
+                </StackLayout>
+                <Label Text="Please enter the recipient's number"
+                       Margin="0,10,0,0"
+                       FontSize="16"
+                       TextColor="#707070"
+                       HorizontalOptions="CenterAndExpand"
+                       FontFamily="Avenir-Medium" />
+                <Label Text="or scan QR code to continue."
+                       FontSize="16"
+                       TextColor="#707070"
+                       HorizontalOptions="CenterAndExpand"
+                       FontFamily="Avenir-Medium" />
+                <StackLayout Margin="30,30,30,0">
+                    <StackLayout Margin="0,0,0,0">
+                        <Label Text="Account Number"
+                               FontSize="12"
+                               TextColor="#EF701C"
+                               FontFamily="Avenir-Black" />
+                        <material:MaterialTextField x:Name="_mobileTextField"
+                                                    IsMaxLengthCounterVisible="False"
+                                                    InputType="Numeric"
+                                                    mvx:Bi.nd="Text AccountNumber"
+                                                    Margin="-5,0,0,0"
+                                                    MaxLength="15"
+                                                    TintColor="#EF701C"
+                                                    AlwaysShowUnderline="True"
+                                                    CardBackgroundColor="Transparent" />
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="End">
+                            <Button Text="Scan QR Code"
+                                    mvx:Bi.nd="Command ScanCommand"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"
+                                    Margin="0,0,0,0"
+                                    TextColor="#EF701C"
+                                    FontFamily="Avenir-Black"
+                                    FontSize="Medium" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Margin="0,-10,0,0">
+                        <Label Text="AMOUNT (POINTS)"
+                               FontSize="12" 
+                               TextColor="#EF701C"
+                               FontFamily="Avenir-Black" />
+                        <material:MaterialTextField x:Name="AmountPoints"
+                                                    InputType="Numeric"
+                                                    mvx:Bi.nd="Text PaymentAmount"
+                                                    Margin="-5,0,0,0" 
+                                                    TintColor="#EF701C" TextColor="Black"
+                                                    AlwaysShowUnderline="True" IsEnabled="{Binding IsValueMacdonald}"
+                                                    CardBackgroundColor="Transparent" />
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,0,0,0">
+                            <Label Text="Available Balance :"
+                                   FontSize="11"
+                                   TextColor="#EF701C"
+                                   Margin="0,0,0,0" />
+                            <Label  mvx:Bi.nd="Text RemainingAmount"   
+                                   FontSize="11"
+                                   Margin="0,0,0,0"
+                                   TextColor="#707070" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Margin="0,10,0,0">
+                        <Label Text="REASON (OPTIONAL)"
+                               FontSize="12"
+                               TextColor="#EF701C"
+                               FontFamily="Avenir-Black" />
+                        <material:MaterialTextField x:Name="ReasonOptional"
+                                                    InputType="Text"
+                                                    mvx:Bi.nd="Text Reason"  
+                                                    Margin="-5,0,0,0"
+                                                    TintColor="#EF701C"
+                                                    AlwaysShowUnderline="True"
+                                                    CardBackgroundColor="Transparent" />
+                        </StackLayout>
+                    <Button Margin="30,35,30,30"
+                            Text="CONTINUE"
+                            mvx:Bi.nd="Command PayCommand"
+                            CornerRadius="25"
+                            Style="{StaticResource ButtonStyle}"
+                            BackgroundColor="#EF701C" />
+                </StackLayout>
+                </StackLayout>
+
+                </ScrollView>
+ 
+               </StackLayout>
+
+            </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

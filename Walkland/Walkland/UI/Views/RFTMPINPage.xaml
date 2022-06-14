@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.RFTMPINPage"
+                       x:TypeArguments="viewModels:RFTMPINPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <Grid BackgroundColor="White"  Margin="{OnPlatform Android='0,0,0,0', iOS='0,50,0,0'}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="6*" />
+                    </Grid.RowDefinitions>
+                    <Grid BackgroundColor="#EF701C">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0"
+                              Grid.ColumnSpan="3"
+                              Margin="0,0,0,0">
+                            <Image Source="goback.png"
+                                   Grid.Column="0"
+                                   Margin="20,20,20,20"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PreviousPageCommand}"
+                                                          NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Grid.ColumnSpan="2"
+                                   Text="Verify MPIN"
+                                   Style="{StaticResource HeaderLabel}" />
+                        </Grid>
+                    </Grid>
+                    <StackLayout Grid.Row="1">
+                        <StackLayout Padding="0,40,0,0"
+                                     HorizontalOptions="Center">
+                            <Label Text="Verify Your MPIN"
+                                   TextColor="#2E2E2E"
+                                   FontSize="41"
+                                   HorizontalTextAlignment="Center"
+                                   FontFamily="Poppins-SemiBold"
+                                   Margin="0,20,0,0" />
+                            <Label Text="Please verify your 4 digit MPIN to"
+                                   TextColor="#707070"
+                                   FontSize="16"
+                                   HorizontalTextAlignment="Center"
+                                   FontFamily="Poppins-MediumBold"
+                                   Style="{StaticResource LabelStyle}" />
+                            <Label Text="make transactions."
+                                   TextColor="#707070"
+                                   FontSize="16"
+                                   HorizontalTextAlignment="Center"
+                                   FontFamily="Poppins-MediumBold"
+                                   Style="{StaticResource LabelStyle}" />
+                        </StackLayout>
+                        <Grid Grid.Row="2"
+                              Margin="40,40,40,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0">
+                                    <Label x:Name="label1"
+                                           Text="{Binding Text1, Mode=TwoWay}"
+                                           TextColor="Black"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           HeightRequest="30" />
+                                    <BoxView BackgroundColor="Gray"
+                                             HeightRequest="1"
+                                             WidthRequest="60"
+                                             HorizontalOptions="Center"
+                                             Margin="0,0,0,0" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label x:Name="label2"
+                                           Text="{Binding Text2, Mode=TwoWay}"
+                                           TextColor="Black"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           Grid.Column="1"
+                                           HeightRequest="30" />
+                                    <BoxView BackgroundColor="Gray"
+                                             HeightRequest="1"
+                                             WidthRequest="60"
+                                             HorizontalOptions="Center" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Label x:Name="label3"
+                                           Text="{Binding Text3, Mode=TwoWay}"
+                                           TextColor="Black"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           Grid.Column="2"
+                                           HeightRequest="30" />
+                                    <BoxView BackgroundColor="Gray"
+                                             HeightRequest="1"
+                                             WidthRequest="60"
+                                             HorizontalOptions="Center" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="3">
+                                    <Label x:Name="label4"
+                                           Text="{Binding Text4, Mode=TwoWay}"
+                                           TextColor="Black"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           Grid.Column="3"
+                                           HeightRequest="30" />
+                                    <BoxView BackgroundColor="Gray"
+                                             HeightRequest="1"
+                                             WidthRequest="60"
+                                             HorizontalOptions="Center" />
+                                </StackLayout>
+                            </Grid>
+                            <Editor TextChanged="Editor_TextChanged"
+                                    Keyboard="Numeric"
+                                    TextColor="Transparent"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="FillAndExpand"
+                                    Grid.Row="0" />
+                        </Grid>
+                    </StackLayout>
+                    <Grid Grid.Row="3"
+                          Margin="40,0,40,0">
+                        <StackLayout>
+                            <Button Text="Verify"
+                                    FontSize="20"
+                                    Command="{Binding RFTMPINVerifyCommand, Mode=TwoWay}"
+                                    CornerRadius="25"
+                                    BackgroundColor="#EF701C"
+                                    HorizontalOptions="Center"
+                                    TextColor="White"
+                                    FontFamily="NunitoSans-ExtraBold"
+                                    VerticalOptions="Center"
+                                    HeightRequest="48"
+                                    WidthRequest="253" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,63 @@
+﻿<Properties StartupConfiguration="{0F115DC0-274B-4997-92B6-8CF6FB71F76E}|Default">
+  <MonoDevelop.Ide.ItemProperties.Walkland.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.194A2F98-8463-4656-9374-D19071AEEB31" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Walkland/UI/Views/CompanyCategoryPage.xaml" Line="132" Column="58" />
+      <File FileName="Walkland/UI/Views/CompanyPage.xaml" />
+      <File FileName="Walkland/UI/Views/CompanyWithLocationPage.xaml" />
+      <File FileName="Walkland/UI/Views/CompanyReviewPage.xaml" />
+      <File FileName="Walkland/UI/Views/AboutusPage.xaml" />
+      <File FileName="Walkland/UI/Views/HomePage.xaml" />
+      <File FileName="Walkland/UI/Views/HomePage.xaml.cs" />
+      <File FileName="Walkland/Core/ViewModels/HomePageViewModel.cs" />
+      <File FileName="Walkland/Core/ViewModels/SearchPageViewModel.cs" />
+      <File FileName="Walkland/UI/Views/SearchPage.xaml" />
+      <File FileName="Walkland/UI/Views/SearchPage.xaml.cs" />
+      <File FileName="Walkland/Core/ViewModels/CompanyPageViewModel.cs" />
+      <File FileName="Walkland/Core/ViewModels/CompanyWithLocationPageViewModel.cs" />
+      <File FileName="Walkland.Android/Properties/AndroidManifest.xml" />
+      <File FileName="Walkland/Core/ViewModels/RFTSuccessfulPageViewModel.cs" Line="1" Column="1" />
+      <File FileName="Walkland/Core/ViewModels/PaymentSuccessfulViewModel.cs" Line="110" Column="31" />
+      <File FileName="Walkland/Core/ViewModels/PaymentConfirmPageViewModel.cs" Line="1" Column="1" />
+      <File FileName="Walkland/Core/ViewModels/SendPageViewModel.cs" Line="377" Column="33" />
+      <File FileName="Walkland/UI/Views/RFTSuccessfulPage.xaml" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Walkland" expanded="True">
+            <Node name="Walkland.Android" expanded="True" selected="True">
+              <Node name="Properties" expanded="True" />
+              <Node name="Resources" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Walkland.Android AndroidDesignerPreferredTheme="MainTheme" AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="../../../Walkland.iOS/Main.cs" line="22" column="41" endLine="22" endColumn="50" offsetX="-1" offsetY="-1" expression="e.Message" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <Debugger.DebugSourceFolders>
+    <String>/Users/shanmugasundharam/Library/Caches/VisualStudio/8.0/Symbols/MvvmCross/MvvmCross/aa4ec9aee992491110fda990e745940391c1a6f3</String>
+  </Debugger.DebugSourceFolders>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/UI/Views/PaymentConfirmPage.xaml.cs" relfile="Walkland/UI/Views/PaymentConfirmPage.xaml.cs" line="6" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/UI/Views/CompanyWalletPage.xaml.cs" relfile="Walkland/UI/Views/CompanyWalletPage.xaml.cs" line="9" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/UI/Views/Sdemo.xaml.cs" relfile="Walkland/UI/Views/Sdemo.xaml.cs" line="9" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/UI/Views/PaymentSucessful.xaml.cs" relfile="Walkland/UI/Views/PaymentSucessful.xaml.cs" line="17" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/Services/Interfaces/ICompanyProductService.cs" relfile="Walkland/Core/Services/Interfaces/ICompanyProductService.cs" line="9" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/Services/Implementation/CompanyProductService.cs" relfile="Walkland/Core/Services/Implementation/CompanyProductService.cs" line="41" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/Services/Implementation/CompanyOfferService.cs" relfile="Walkland/Core/Services/Implementation/CompanyOfferService.cs" line="150" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/Services/Implementation/CompanyOfferService.cs" relfile="Walkland/Core/Services/Implementation/CompanyOfferService.cs" line="144" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/ViewModels/SearchPageViewModel.cs" relfile="Walkland/Core/ViewModels/SearchPageViewModel.cs" line="29" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/UI/Views/CompanyReviewPage.xaml.cs" relfile="Walkland/UI/Views/CompanyReviewPage.xaml.cs" line="9" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/ViewModels/CompanyReviewPageViewModel.cs" relfile="Walkland/Core/ViewModels/CompanyReviewPageViewModel.cs" line="21" column="1" />
+      <Breakpoint file="/Users/shanmugasundharam/Documents/Walkland/Walkland/Core/Services/Implementation/CompanyWalletTransactionService.cs" relfile="Walkland/Core/Services/Implementation/CompanyWalletTransactionService.cs" line="104" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

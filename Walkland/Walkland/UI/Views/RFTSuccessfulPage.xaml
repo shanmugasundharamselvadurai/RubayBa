@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.RFTSuccessfulPage"
+                       x:TypeArguments="viewModels:RFTSuccessfulPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!--Top Nav Bar-->
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                    <Label Text="Success"
+                           TextColor="#FFFFFF"
+                           FontFamily="Poppins-Bold"
+                           FontSize="25"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+            </Grid>
+            <ScrollView Grid.Row="1"
+                        BackgroundColor="White">
+                <Grid Margin="20,0,20,80">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3"
+                          Margin="0,-30,0,0">
+                        <StackLayout x:Name="imageScreenShot"
+                                     Orientation="Vertical">
+                            <ImageButton Source="Shareicon.png"
+                                         Grid.Column="0"
+                                         HeightRequest="40"
+                                         WidthRequest="40"
+                                         Command="{Binding EmailCommand}"
+                                         CommandParameter="{x:Reference imageScreenShot}"
+                                         BackgroundColor="Transparent"
+                                         HorizontalOptions="End"
+                                         Margin="0,30,0,30" />
+                            <Image VerticalOptions="FillAndExpand"
+                                   MinimumHeightRequest="400"
+                                   MinimumWidthRequest="400"
+                                   Source="{Binding ResultImageSource}" />
+                            <Image Source="SplashIcon.png"
+                                   Grid.Column="1"
+                                   HeightRequest="150"
+                                   WidthRequest="150"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Margin="20,-80,10,0" />
+                            <StackLayout Grid.Row="1"
+                                         Grid.Column="0"
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="Start"
+                                         Margin="20,-20,10,0">
+                                <Image Source="checkmark.png"
+                                       HeightRequest="50"
+                                       WidthRequest="50"
+                                       HorizontalOptions="Start" />
+                                <Label Text="Return Successfully!"
+                                       Grid.ColumnSpan="2"
+                                       FontSize="28"
+                                       FontFamily="Poppins-Bold"
+                                       HorizontalTextAlignment="Start"
+                                       TextColor="#2E2E2E"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="30,20,10,0"
+                                         Orientation="Horizontal">
+                                <Label Text="{Binding PayAmount}"
+                                       FontSize="35"
+                                       TextColor="#2E2E2E"
+                                       Margin="0,0,5,0" />
+                                <Label Text="RFT"
+                                       FontSize="35"
+                                       TextColor="#2E2E2E" />
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="30,0,10,0">
+                                <StackLayout Margin="0,-5,0,0"
+                                             Orientation="Horizontal">
+                                    <Label Text="Wallet linked to"
+                                           FontSize="19"
+                                           TextColor="#656565" />
+                                    <Label Text="{Binding LegalName}"
+                                           FontSize="18"
+                                           TextColor="#656565" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="30,20,10,0">
+                                <Label Text="TRANSACTION ID:"
+                                       FontSize="14"
+                                       TextColor="#EF701C"
+                                       FontFamily="Poppins-SemiBold" />
+                                <Label Text="{Binding TransactionId}"
+                                       FontSize="18"
+                                       TextColor="#656565" />
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Start"
+                                         Margin="30,20,10,0">
+                                <Label Text="{Binding TransactionDateTime, StringFormat='{0:dd MMM, yyyy hh:mm tt}'}"
+                                       FontSize="19"
+                                       TextColor="#656565" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1">
+                            <Button Command="{Binding EwalletPageCommand}"
+                                    WidthRequest="253"
+                                    HeightRequest="48"
+                                    CornerRadius="25"
+                                    Margin="50,40,50,0"
+                                    Text="Continue"
+                                    Style="{StaticResource ButtonStyle}" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

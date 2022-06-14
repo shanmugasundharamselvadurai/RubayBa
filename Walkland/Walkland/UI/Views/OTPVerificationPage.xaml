@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.OTPVerificationPage"
+                       x:TypeArguments="viewModels:OTPVerificationPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                       xmlns:contorls="clr-namespace:UI.Contorls"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid Margin="30,0,30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="6*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            </Grid>
+            <StackLayout Grid.Row="1">
+                <StackLayout Padding="0,0,0,0"
+                             HorizontalOptions="Center">
+                    <Image HorizontalOptions="Center"
+                           Source="logo.png"
+                           VerticalOptions="Center"
+                           HeightRequest="120"
+                           WidthRequest="270"
+                           Aspect="Fill" />
+                    <Label Text="Enter Your OTP"
+                           TextColor="#2E2E2E"
+                           FontSize="41"
+                           HorizontalTextAlignment="Center"
+                           FontFamily="Avenir-Black"
+                           Margin="0,20,0,0" />
+                    <Label Text="Please enter your 6 digit OTP for verification"
+                           TextColor="#707070"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"
+                           FontFamily="Poppins-MediumBold"
+                           Style="{StaticResource LabelStyle}" />
+                </StackLayout>
+                <StackLayout    Margin="{OnPlatform Android='30,30,30,0', iOS='10,20,0,0'}"
+                                HorizontalOptions="CenterAndExpand">
+                    <StackLayout Padding="0,20,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <contorls:AutoFillControl  x:Name="UserInputOTP"
+                                    Placeholder="Enter Your OTP"
+                                    Text="{Binding EnterOTPCode}"
+                                    Margin="0,-8,0,10"
+                                    FontSize="24"
+                                    PlaceholderColor="DimGray"
+                                    HorizontalTextAlignment="Center"
+                                    MaxLength="6" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Margin="0,30,0,0">
+                    <Button Text="Verify"
+                            FontSize="20"
+                            Command="{Binding OTPVerifyCommand}"
+                            BackgroundColor="#EF701C"
+                            HorizontalOptions="Center"
+                            TextColor="White"
+                            FontFamily="Avenir-Black"
+                            CornerRadius="25"
+                            VerticalOptions="Center"
+                            HeightRequest="48"
+                            WidthRequest="253" />
+
+
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

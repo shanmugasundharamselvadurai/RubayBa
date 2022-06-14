@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.TermandConditionPage"
+                       x:TypeArguments="viewModels:TermandConditionPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid BackgroundColor="White"  Margin="{OnPlatform Android='0,0,0,0', iOS='0,50,0,0'}" 
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="#d4e7ff">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3"
+                          BackgroundColor="#EF701C">
+                        <Image Source="goback.png"
+                               Grid.Column="0"
+                               Margin="20,20,20,20"
+                               HeightRequest="25"
+                               WidthRequest="25"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                      NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Grid.ColumnSpan="2"
+                               Text="Terms &amp; Conditions"
+                               Style="{StaticResource HeaderLabel}"
+                               HorizontalOptions="CenterAndExpand" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Frame BackgroundColor="LightGray"
+                   Padding="2"
+                   Grid.Row="1">
+                <ScrollView Margin="7,7,7,7">
+                    <StackLayout Padding="10"
+                                 BackgroundColor="White">
+                        <Label Text="What is Lorem Ipsum?"
+                               FontSize="Title" />
+                        <Label Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                               FontSize="Body"
+                               LineHeight="1.1" />
+                        <Label Text="Why do we use it?"
+                               FontSize="Title" />
+                        <Label Text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                               FontSize="Body"
+                               LineHeight="1.1" />
+                        <Label Text="Where does it come from?"
+                               FontSize="Title" />
+                        <Label Text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                               FontSize="Body"
+                               LineHeight="1.1" />
+                        <Label Text="Where can I get some?"
+                               FontSize="Title" />
+                        <Label Text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                               FontSize="Body"
+                               LineHeight="1.1" />
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

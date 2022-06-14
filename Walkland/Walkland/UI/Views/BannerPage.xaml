@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage  xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                       xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="Walkland.UI.Views.BannerPage"
+                       x:TypeArguments="viewModels:BannerPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                       xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid> 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3" 
+                          BackgroundColor="#EF701C">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                       
+                            <Image Source="goback.png"
+                                   Grid.Column="0"
+                                   Margin="20,45,20,20"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                          NumberOfTapsRequired="1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Grid.Column="1"
+                                   Text="Offer Details" Margin="0,20,0,0"
+                                   Style="{StaticResource HeaderLabel}"
+                                   HorizontalOptions="CenterAndExpand" />
+
+                         <Image Source="home.png"
+                                   Grid.Column="2"
+                                   Margin="20,45,20,20"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CompanyDetailPageCommand}"
+                                                          NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    
+                <ScrollView  Grid.Row="1" Grid.ColumnSpan="3">
+                    <StackLayout Margin="18,0,18,0"
+                                 Grid.Row="1">
+                        <pancake:PancakeView CornerRadius="15"
+                                             Margin="0,20,0,0">
+                            <Frame BorderColor="DarkGray"
+                                   CornerRadius="15"
+                                   Padding="0,0,0,0"
+                                   HeightRequest="180"
+                                   HasShadow="False"
+                                   HorizontalOptions="FillAndExpand">
+                                <Image Source="{Binding ImagePath}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="180"
+                                       WidthRequest="150"
+                                       HorizontalOptions="FillAndExpand"></Image>
+                            </Frame>
+                        </pancake:PancakeView>
+                        <Label Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               TextColor="#656565"
+                               LineBreakMode="WordWrap"
+                               FontSize="20"
+                               Text="{Binding Description}"
+                               HorizontalOptions="CenterAndExpand"
+                               Margin="0,20,0,0" />
+                        <Button Margin="50,20,50,0"
+                                Command="{Binding OpenWebCommand}"
+                                CornerRadius="25"
+                                Text="GO TO PAGE"
+                                Style="{StaticResource ButtonStyle}" />
+                    </StackLayout>
+            </ScrollView>
+            </Grid>
+           
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>
