@@ -277,17 +277,20 @@ namespace Walkland.Core.ViewModels
 
         public IMvxAsyncCommand ScanCommand => new MvxAsyncCommand(async () =>
         {
+
             var scanResult = await _mvxQrCode.Scan("Hold the camera up to the barcode\nAbout 15 cm away",
                                     "The barcode will be automatically scanned",
                                     "Your camera doesn't support barcode scanning");
-         
+
+           // scanResult.ScanStatus = ScanStatus.Success;
+
             switch (scanResult.ScanStatus)
-            {   
+            {
                 case ScanStatus.Success:
-                    Result = scanResult.Result.Text;
+                    Result = scanResult.Result.Text; 
                     var str = Result;
                     var b = Result.Split(',');
-                
+
                     if (b.Length > 1)
                     {
                         AccountNumber = b[0].ToString();
@@ -298,12 +301,14 @@ namespace Walkland.Core.ViewModels
                         try
                         {
                             string patternText = "mcdonalds.+[0-9]+@hdfcbank";
-                            Regex Re = new Regex(patternText);
+                            string PatternPaytm = "paytm-+[0-9]+@paytm";
+                            Regex ReMcdo = new Regex(patternText);
+                            Regex RePaytm = new Regex(PatternPaytm);
 
-                            if (Re.IsMatch(b[0]))
+                            if (ReMcdo.IsMatch(b[0]))
                             {
-                              
-                                var legalname = await _companyWalletService.GetCompanyByQR(b[0].ToString());
+
+                                var legalname = await _companyWalletService.GetCompanyByQRV1(b[0].ToString());
                                 if (!string.IsNullOrEmpty(legalname.ToString()))
                                 {
                                     IsValueMacdonald = false;
@@ -318,7 +323,27 @@ namespace Walkland.Core.ViewModels
                                 {
                                     return;
                                 }
-                        
+
+                            }
+                            else if (RePaytm.IsMatch(b[0]))
+                            {
+
+                                var legalname = await _companyWalletService.GetCompanyByQRV1(b[0].ToString());
+                                if (!string.IsNullOrEmpty(legalname.ToString()))
+                                {
+                                    IsValueMacdonald = false;
+                                    var result = Result.Split('&');
+                                    var amout = result[4].Split('=');
+                                    AccountNumber = legalname.AccountNumber; //4198775948
+                                    PaymentAmount =  Convert.ToDecimal(amout[1].ToString());
+                                    var compLocationID = result[3].Split('=');
+                                    TransNo = Convert.ToString(compLocationID[1].ToString());
+                                }
+                                else
+                                {
+                                    return;
+                                }
+
                             }
                             else
                             {
@@ -333,13 +358,13 @@ namespace Walkland.Core.ViewModels
                                     return;
                                 }
                             }
-                         } 
-                         catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             _ = e.StackTrace;
                         }
-                      }
-                    
+                    }
+
                     break;
                 case ScanStatus.Canceled:
                     Result = "Scan canceled";

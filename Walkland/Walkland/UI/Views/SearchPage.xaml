@@ -23,11 +23,12 @@
                 <ColumnDefinition Width="6*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <StackLayout Grid.Row="0"
                          Grid.ColumnSpan="3"
                          BackgroundColor="#EF701C"
                          Orientation="Horizontal">
-                <StackLayout Grid.Column="0">
+                <StackLayout Grid.Column="0" Orientation="Horizontal">
                     <Image Source="goback.png"
                            Grid.Column="0"
                            Margin="20,45,20,20"
@@ -40,6 +41,7 @@
                                                   NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
+                     
                 </StackLayout>
             </StackLayout>
             <material:MaterialTextField x:Name="entrySearch"
@@ -66,7 +68,18 @@
                              HorizontalOptions="StartAndExpand"
                              VerticalOptions="StartAndExpand">
                 </ImageButton>
+                
+            
+               <!--<Image 
+                      HeightRequest="35"
+                      WidthRequest="35"
+                        HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="EndAndExpand"
+                               Source="filter.png" />-->
+             
             </StackLayout>
+                                                   
+     
             <!--<StackLayout Grid.Row="1"
                          Grid.ColumnSpan="3"
                          Margin="5,0,0,0">

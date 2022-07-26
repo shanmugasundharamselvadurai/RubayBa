@@ -28,7 +28,11 @@
 
         public long CompanyCategoryId { get; set; }
 
+        public string PriceRange { get; set; }
+        
         public  CompanyWallet CompanyWallet { get; set; }
+
+        public CompanySubCategory companySubCategory { get; set; }
 
     }
 }

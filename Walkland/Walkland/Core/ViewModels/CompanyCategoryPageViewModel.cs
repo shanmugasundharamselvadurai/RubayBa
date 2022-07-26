@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace Walkland.Core.ViewModels
 {
-        public class CompanyCategoryPageViewModel : MvxViewModel<CompanyCategory>
+        public class CompanyCategoryPageViewModel : MvxViewModel<CompanySubCategory>
         {
             private readonly IMvxNavigationService _navigationService;
             private readonly IUserDialogs _userDialogs;
@@ -40,8 +40,8 @@ namespace Walkland.Core.ViewModels
             }
 
 
-        private CompanyCategory _companyCategory;
-        public CompanyCategory CompanyCategory
+        private CompanySubCategory _companyCategory;
+        public CompanySubCategory CompanyCategory
         {
             get => _companyCategory;
             set => SetProperty(ref _companyCategory, value);
@@ -89,7 +89,7 @@ namespace Walkland.Core.ViewModels
                 set => SetProperty(ref _rating, value);
             }
 
-            public override void Prepare(CompanyCategory companyCategoryModel)
+            public override void Prepare(CompanySubCategory companyCategoryModel)
             {
                 CompanyCategory = companyCategoryModel;
                 Id = CompanyCategory.Id;
@@ -129,7 +129,7 @@ namespace Walkland.Core.ViewModels
                 try
                 {
                   location = await Geolocation.GetLastKnownLocationAsync();
-                   var companyCategory = await _companyService.GetCompanyByCompanyCategoryId(Id);
+                   var companyCategory = await _companyService.GetCompanyByCompanySubCategoryId(Id);
                   //var companyCategory = await _companyService.FindNearByCompaniesByCategory(Id, location.Latitude.ToString(), location.Longitude.ToString());
 
                 foreach (var companyCategories in companyCategory)

@@ -28,6 +28,7 @@ namespace Walkland.Core.Services.Implementation
                                                     CompanyCategoryId
                                                     LogoStoragePath
                                                     Rating
+                                                    
                                                     }
                              }
                 }}"

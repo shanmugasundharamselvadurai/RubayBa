@@ -36,5 +36,32 @@ namespace Walkland.Core.Services.Implementation
                 return (response.Data["CompanyCategoryQueries"]["GetCompanyCategories"]).ToObject<List<Models.CompanyCategory>>();
             }
         }
+
+        public async Task<List<CompanySubCategory>> GetCompanySubCategories(long Id)
+        {
+            var request = new GraphQLRequest
+            {
+                Query = @" query CompanySubCategoryQueries_GetCompanySubCategories
+                 {
+                  CompanySubCategoryQueries{
+                      GetCompanySubCategories (Id:" + Id + ")" +
+                  @"{
+                            Id
+                            Name
+                            CategoryId
+                            CompanySubCategoryStoragePath
+                   }}}"
+            };
+
+            var response = await CoreApp.UserGraphQLClient.SendQueryAsync<JObject>(request);
+            if (response.Errors != null)
+            {
+                throw new Exception(response.Errors[0].Message);
+            }
+            else
+            {
+                return (response.Data["CompanySubCategoryQueries"]["GetCompanySubCategories"]).ToObject<List<Models.CompanySubCategory>>();
+            }
+        }
     }
 }

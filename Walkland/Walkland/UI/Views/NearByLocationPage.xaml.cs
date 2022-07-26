@@ -9,7 +9,8 @@ namespace UI.Views
 {
     public partial class NearByLocationPage : MvxContentPage<NearByLocationPageViewModel>
     {
-        private readonly string GooglePlacesApiKey = "AIzaSyCFg-uiuIHpvvO-og2bcWyOXj4BMkK4iOc";
+        private readonly string GooglePlacesApiKey = "AIzaSyAfK6zqW-mMq_u6C07a8KXkBUmZfsO2CL4";
+
 
         public NearByLocationPage()
         {
@@ -38,41 +39,58 @@ namespace UI.Views
 
         void Search_Bar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.NewTextValue))
+            try
             {
-                results_list.IsVisible = false;
-                spinner.IsVisible = true;
-                spinner.IsRunning = true;
+                if (!string.IsNullOrEmpty(e.NewTextValue))
+                {
+                    results_list.IsVisible = false;
+                    spinner.IsVisible = true;
+                    spinner.IsRunning = true;
+                }
+                else
+                {
+                    results_list.IsVisible = true;
+                    spinner.IsRunning = false;
+                    spinner.IsVisible = false;
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                results_list.IsVisible = true;
-                spinner.IsRunning = false;
-                spinner.IsVisible = false;
+                System.Console.WriteLine(ex.Message);
             }
+
         }
 
         async void Results_List_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e.SelectedItem == null)
-                return;
-
-            var prediction = (AutoCompletePrediction)e.SelectedItem;
-            results_list.SelectedItem = null;
-
-            var place = await Places.GetPlace(prediction.Place_ID, GooglePlacesApiKey);
-            if (place != null)
+            try
             {
-                string.Format("Lat: {0}\nLon: {1}", place.Latitude, place.Longitude);
+                if (e.SelectedItem == null)
+                    return;
+
+                var prediction = (AutoCompletePrediction)e.SelectedItem;
+                results_list.SelectedItem = null;
+
+                var place = await Places.GetPlace(prediction.Place_ID, GooglePlacesApiKey);
+                if (place != null)
                 {
-                    Console.WriteLine($"Latitude: {place.Latitude}, Longitude: {place.Longitude}");
+                    string.Format("Lat: {0}\nLon: {1}", place.Latitude, place.Longitude);
+                    {
+                        Console.WriteLine($"Latitude: {place.Latitude}, Longitude: {place.Longitude}");
+                    }
+
+                    ViewModel.Latitude = place.Latitude.GetValueOrDefault();
+                    ViewModel.Longitude = place.Longitude.GetValueOrDefault();
+
+                    await ViewModel.SendDataToHomePage();
                 }
-
-                ViewModel.Latitude = place.Latitude.GetValueOrDefault();
-                ViewModel.Longitude = place.Longitude.GetValueOrDefault();
-
-                await ViewModel.SendDataToHomePage();
             }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+           
         }
     }
 }

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage
+ xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Walkland.UI.Views.CompanySubCategoryPage"
+    x:TypeArguments="viewModels:CompanySubCategoryPageViewModel"
+                       xmlns:viewModels="clr-namespace:Walkland.Core.ViewModels;assembly=Walkland.Core"
+                       xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                 
+                       ios:Page.UseSafeArea="False"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="White">
+    <ContentPage.Content>
+          <StackLayout >
+            <Grid BackgroundColor="#E9E0E0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                 <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="3"
+                      BackgroundColor="#EF701C">
+                     <StackLayout Grid.Row="0"
+                      Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <Image Source="goback.png"
+                           Grid.Column="0"
+                           Margin="20,45,20,20"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateBackCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.ColumnSpan="2" Margin="0,20,0,0"
+                           Text="{Binding CategoryName}"
+                           Style="{StaticResource HeaderLabel}"
+                           HorizontalOptions="CenterAndExpand" />
+
+                      <!--<Image Grid.ColumnSpan="3" 
+                               HeightRequest="35"
+                               WidthRequest="35"
+                               Margin="20,20,24,0" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Source="filter.png" />-->
+                         </StackLayout>
+                    </Grid>
+                <!--Company List-->
+                <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                             Grid.ColumnSpan="3"  x:Name="dd"
+                             Margin="0,0,0,0"
+                             BackgroundColor="White">
+                    <CollectionView 
+                                    ItemsSource="{Binding CompanySubList}"
+                                    x:Name="CompanySubList"
+                                    SelectionMode="Single"
+                                    SelectionChanged="CompanySubList_SelectionChanged_1"
+                                    SelectionChangedCommand="{Binding CompanyListTappedCommand}"
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CompanySubList}}"
+                                    EmptyView="No Company Found">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,0"
+                                      Padding="0"
+                                      HeightRequest="{OnPlatform Android='130', iOS='130'}"
+                                      BackgroundColor="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Margin="0"
+                                                 HorizontalOptions="CenterAndExpand"
+                                                 Orientation="Horizontal">
+                                        <StackLayout Grid.Row="0"
+                                                     Grid.Column="0">
+                                            <Frame Padding="20,0,0,0"
+                                                   CornerRadius="5"
+                                                   IsClippedToBounds="True"
+                                                   BackgroundColor="White"
+                                                   HasShadow="False"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="CenterAndExpand">
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Aspect="AspectFit"
+                                                       HeightRequest="84"
+                                                       Source="{Binding CompanySubCategoryStoragePath,Converter={StaticResource ImageConverter}}"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center"
+                                                       WidthRequest="150"
+                                                       Margin="0,15,0,0" />
+                                            </Frame>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     HorizontalOptions="Center">
+                                            <StackLayout Margin="10,20,0,0"
+                                                         Grid.Row="0"
+                                                         Grid.Column="1">
+                                                <Label FontSize="20"
+                                                       FontAttributes="Bold"
+                                                       Text="{Binding Name}"
+                                                       TextColor="Black"                                                     
+                                                       HorizontalOptions="StartAndExpand"
+                                                       VerticalOptions="StartAndExpand"/>
+                                          
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <BoxView Grid.Row="2"
+                                             Grid.ColumnSpan="3"
+                                             WidthRequest="1"
+                                             HeightRequest="1"
+                                             Color="#E9E0E0"
+                                             Margin="{OnPlatform Android='0,22,0,10', iOS='0,20,0,10'}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

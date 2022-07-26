@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.rupaybachao" android:installLocation="auto" android:versionCode="29" android:versionName="1.0.16">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.rupaybachao" android:installLocation="auto" android:versionName="1.0.18" android:versionCode="31">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
 	<application android:label="Rupay Bachao" android:theme="@style/MainTheme" android:icon="@drawable/Icon">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDpK7F2fr09sXI66H50u3Qi9zoTDgWLxBs" />

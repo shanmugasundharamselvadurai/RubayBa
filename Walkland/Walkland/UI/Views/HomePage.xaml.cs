@@ -36,5 +36,9 @@ namespace Walkland.UI.Views
                 nearbyLocation.SelectedItem = null;
             }
         }
+
+        //void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        //{
+        //}
     }
 }

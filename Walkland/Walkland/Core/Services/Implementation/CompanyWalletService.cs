@@ -117,6 +117,29 @@ namespace Walkland.Core.Services.Implementation
             }
         }
 
+        public async Task<Models.CompanyWallet> GetCompanyByQRV1(string accountNumber)
+        {
+            var request = new GraphQLRequest
+            {
+                Query = @"query CompanyQueries_GetCompanyByQRV1
+                 {
+                  CompanyQueries{
+                      GetCompanyByQRV1 (AccountNumber:" + '"' + accountNumber + '"' + ")" +
+                      @"{   
+                            AccountNumber
+                        }}}"
 
+            };
+
+            var response = await CoreApp.UserGraphQLClient.SendQueryAsync<JObject>(request);
+            if (response.Errors != null)
+            {
+                throw new Exception(response.Errors[0].Message);
+            }
+            else
+            {
+                return response.Data["CompanyQueries"]["GetCompanyByQRV1"].ToObject<Models.CompanyWallet>();
+            }
+        }
     }
 }

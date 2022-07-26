@@ -11,5 +11,6 @@ namespace Walkland.Core.Services.Interfaces
         Task<Company> GetCompanyByAccountNumber(string accountNumber);
         Task<Company> GetCompanyById(long Id);
         Task<Models.CompanyWallet> GetCompanyByQR(string accountNumber);
+        Task<Models.CompanyWallet> GetCompanyByQRV1(string accountNumber);
     }
 }

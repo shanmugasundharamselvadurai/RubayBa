@@ -7,5 +7,6 @@ namespace Walkland.Core.Services.Interfaces
     public interface ICompanyCategoryService
     {
         Task<List<Models.CompanyCategory>> GetCompanyCategories();
+        Task<List<Models.CompanySubCategory>> GetCompanySubCategories(long Id);
     }
 }

@@ -36,6 +36,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.1.1" />
+    <PackageReference Include="RxUI.Plugins.Popup" Version="0.4.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Core\" />
@@ -72,6 +73,7 @@
     <None Remove="UI\Contorls\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Xam.Plugin.DeviceInfo" />
+    <None Remove="RxUI.Plugins.Popup" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />

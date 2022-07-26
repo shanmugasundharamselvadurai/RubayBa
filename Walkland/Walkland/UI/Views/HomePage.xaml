@@ -230,13 +230,26 @@
                     <!--4th row-->
                     <StackLayout Grid.Row="2"
                                  Grid.ColumnSpan="3">
-                        <Label Grid.Row="2"
-                               Grid.ColumnSpan="3"
+
+                        <StackLayout Grid.Row="2"
+                                 Grid.ColumnSpan="3" Orientation="Horizontal">
+                            <Label 
                                Margin="24,20,24,0"
                                Text="Latest Deals"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="CenterAndExpand"
                                FontSize="19"
                                TextColor="#2E2E2E"
-                               FontFamily="Avenir-Black" />
+                               FontFamily="Avenir-Black"/>
+                               <!--<Image
+                               Margin="124,20,24,0"
+                               Source="filter.png">
+                                   <Image.GestureRecognizers>
+                                       <TapGestureRecognizer Command="{Binding ImageLatestFilterCommand}"/>
+                                   </Image.GestureRecognizers>
+                               </Image>-->
+                        </StackLayout>
+                        
                         <CollectionView Margin="10,0,10,0" 
                                         x:Name="latestdeal"
                                         Grid.Row="2"
@@ -306,18 +319,34 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
+                      
                     </StackLayout>
 
                     <!--5th row-->
                     <StackLayout Grid.Row="3"
                                  Grid.ColumnSpan="3">
-                        <Label Grid.Row="3"
+
+                         <StackLayout Grid.Row="3"
+                                 Grid.ColumnSpan="3" Orientation="Horizontal">
+
+                            <Label Grid.Row="3"
                                Grid.ColumnSpan="3"
                                Margin="24,0,24,0"
                                Text="Near Me"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="CenterAndExpand"
                                FontSize="19"
                                TextColor="#2E2E2E"
                                FontFamily="Avenir-Black" />
+                          <!--<Image
+                               Margin="124,20,24,0"
+                               Source="filter.png">
+                                   <Image.GestureRecognizers>
+                                       <TapGestureRecognizer Command="{Binding ImageLatestNearMeCommand}"/>
+                                   </Image.GestureRecognizers>
+                              </Image>-->
+                        </StackLayout>
+                      
                         <CollectionView Margin="10,0,0,0"
                                         Grid.Row="6"
                                         Grid.ColumnSpan="3"

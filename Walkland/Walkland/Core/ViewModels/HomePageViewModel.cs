@@ -7,8 +7,10 @@ using Core.Models;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using Rg.Plugins.Popup.Services;
 using Walkland.Core.Models;
 using Walkland.Core.Services.Interfaces;
+using Walkland.UI.Contorls;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -23,10 +25,11 @@ namespace Walkland.Core.ViewModels
         private readonly ILatestDealService _latestDealService;
         private readonly ICompanyLocationService _companyLocationService;
         private readonly IAuthenticationService _authenticationService;
-
+     
         public HomePageViewModel(IMvxNavigationService navigationService, IUserDialogs userDialogs,
             IAppBannerService appBannerService, ICompanyCategoryService companyCategoryService, ILatestDealService latestDealService, ICompanyLocationService companyLocationService, IAuthenticationService Authentication)
         {
+           
             _navigationService = navigationService;
             _userDialogs = userDialogs;
             _appBannerService = appBannerService;
@@ -34,6 +37,7 @@ namespace Walkland.Core.ViewModels
             _latestDealService = latestDealService;
             _companyLocationService = companyLocationService;
             _authenticationService = Authentication;
+
 
             var tasks = new List<Task>
             {
@@ -310,6 +314,43 @@ namespace Walkland.Core.ViewModels
             IsRefreshing = false;
         });
 
+        public IMvxAsyncCommand ImageLatestFilterCommand => new MvxAsyncCommand(async () =>
+        {
+        //    PopupView popup = new PopupView
+        //    {
+        //        isNearme = false,
+        //        isADeals = true,
+        //        isSearch = false,
+        //        isCategory =false,
+        //    };
+        //    await PopupNavigation.Instance.PushAsync(popup);
+        });
+
+        public IMvxAsyncCommand ImageLatestNearMeCommand => new MvxAsyncCommand(async () =>
+        {
+            //PopupView popup = new PopupView
+            //{
+            //    isNearme = true,
+            //    isADeals = false,
+            //    isSearch = false,
+            //    isCategory = false,
+            //};
+            //await PopupNavigation.Instance.PushAsync(popup);
+        });
+
+        //Select Category from Category carousel
+        //public IMvxAsyncCommand<CompanyCategory> CompanyCategoryItemTappedCommand => new MvxAsyncCommand<CompanyCategory>(async (CompanyCategory item) =>
+        //{
+        //    var applicationID = await SecureStorage.GetAsync("ApplicationUserId");
+        //    await _authenticationService.InsertUserCategory(new UserCategoryRequestDto()
+        //    {
+        //        ApplicationUserId = Convert.ToInt32(applicationID),
+        //        CategoryId = item.Id
+        //    });
+
+        //    _ = await _navigationService.Navigate<CompanyCategoryPageViewModel, CompanyCategory>(item);
+        //});
+
         //Select Category from Category carousel
         public IMvxAsyncCommand<CompanyCategory> CompanyCategoryItemTappedCommand => new MvxAsyncCommand<CompanyCategory>(async (CompanyCategory item) =>
         {
@@ -320,8 +361,9 @@ namespace Walkland.Core.ViewModels
                 CategoryId = item.Id
             });
 
-            await _navigationService.Navigate<CompanyCategoryPageViewModel, CompanyCategory>(item);
+            _ = await _navigationService.Navigate<CompanySubCategoryPageViewModel, CompanyCategory>(item);
         });
+
 
         //Go To Latest Deal Detail Page
         public IMvxAsyncCommand<LatestDeal> LatestDealItemTappedCommand => new MvxAsyncCommand<LatestDeal>(async (LatestDeal item) =>
@@ -426,8 +468,13 @@ namespace Walkland.Core.ViewModels
             }
         }
 
+        public async void LoadLatestDeals()
+        {
+         //  await LoadLatestDealsAsync();
+        }
+
         //Latest Deal Method
-        private async Task LoadLatestDealsAsync()
+        public async Task LoadLatestDealsAsync()
         {
             try
             {

@@ -128,6 +128,7 @@ namespace Walkland.Core.ViewModels
 
         public override void Prepare(Company company)
         {
+
             Id = company.Id;
             LogoStoragePath = ImageSource.FromUri(new Uri(Constants.BannerImageURL + company.LogoStoragePath));
             BrandName = company.BrandName;

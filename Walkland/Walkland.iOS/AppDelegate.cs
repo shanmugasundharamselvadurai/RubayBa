@@ -24,7 +24,7 @@ namespace Walkland.iOS
             XF.Material.iOS.Material.Init();
             PancakeViewRenderer.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
-   
+            Rg.Plugins.Popup.Popup.Init();
             Syncfusion.SfRating.XForms.iOS.SfRatingRenderer.Init();
             uiApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, true);
             return base.FinishedLaunching(uiApplication, launchOptions);

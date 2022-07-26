@@ -207,6 +207,9 @@
     <PackageReference Include="Xam.Plugin.DeviceInfo">
       <Version>4.1.1</Version>
     </PackageReference>
+    <PackageReference Include="RxUI.Plugins.Popup">
+      <Version>0.4.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -270,6 +273,9 @@
     <BundleResource Include="Resources\homedark.png" />
     <BundleResource Include="Resources\homedark%402x.png" />
     <BundleResource Include="Resources\homedark%403x.png" />
+    <BundleResource Include="Resources\filter%403x.png" />
+    <BundleResource Include="Resources\filter.png" />
+    <BundleResource Include="Resources\filter%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork" />

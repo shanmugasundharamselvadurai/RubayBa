@@ -11,6 +11,7 @@ using Acr.UserDialogs;
 using Walkland.Core;
 using Plugin.Fingerprint;
 using Helper;
+using Android.Content;
 
 namespace Walkland.Droid    
 {
@@ -26,8 +27,10 @@ namespace Walkland.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             UserDialogs.Init(this);
+
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Material.Init(this, savedInstanceState);
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
 
@@ -38,14 +41,15 @@ namespace Walkland.Droid
             CrossFingerprint.SetCurrentActivityResolver(() => this);
 
             base.OnCreate(savedInstanceState);
+         
             // For Add SMS Read 
             string Value = AppHashKeyHelper.GetAppHashKey(this);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
